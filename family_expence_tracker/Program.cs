@@ -1,11 +1,25 @@
-﻿DynamicArray dynamicArray = new DynamicArray();
-dynamicArray.Add(new Member(1, "John", 1234));
-dynamicArray.Add(new Member(2, "Doe", 1234));
+﻿namespace family_expence_tracker{
+    class Program{
 
-dynamicArray.Print();
+        static void Main(string[] args)
+        {
+            
+            Console.WriteLine("Welcome to Family Expense Tracker");
+            Console.WriteLine("Please enter your name: ");
+            string name = Console.ReadLine();
+            Console.WriteLine("Please enter your age: ");
+            int age = Convert.ToInt32(Console.ReadLine());
+            
+            
 
-Dlinkedlist dlinkedlist = new Dlinkedlist();
-dlinkedlist.AddFirst(new Expence(1, "Bread", 100, null, dynamicArray.array[0]));
-dlinkedlist.AddFirst(new Expence(2, "Butter", 200, null, dynamicArray.array[1]));
+            
+        }
 
-dlinkedlist.PrintFromStart();
+    }
+    
+}
+
+
+
+
+
