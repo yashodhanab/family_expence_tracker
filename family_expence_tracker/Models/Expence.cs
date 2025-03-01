@@ -6,13 +6,13 @@ class Expence{
     public string Name;
     public int Amount;
     public string Date;
-    public int MemberID;
+    public Member Member;
 
 
 
 
 
-    public Expence(int id, string name, int amount, string date, int memberID){
+    public Expence(int id, string name, int amount, string date, Member member){
         DateTime currentDate = DateTime.Now;  
         if (date == null){
             date = currentDate.ToString("yyyy-MM-dd");
@@ -22,7 +22,7 @@ class Expence{
         this.Name = name;
         this.Amount = amount;
         this.Date = date;
-        this.MemberID = memberID;
+        this.Member = member;
     }
 
 }

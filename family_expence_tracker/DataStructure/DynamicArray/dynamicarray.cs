@@ -6,7 +6,7 @@ class DynamicArray
 
     private int count;
     private int capacity;
-    private Member[] array;
+    public Member[] array;
 
     public DynamicArray(){
         capacity=2;
