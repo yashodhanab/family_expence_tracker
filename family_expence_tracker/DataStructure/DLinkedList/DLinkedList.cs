@@ -7,6 +7,7 @@ class Dlinkedlist{
     private int count;
     private Node? Head;
     private Node? Tail;
+    private int idCounter = 1;
 
     public Dlinkedlist(){
         count = 0;
@@ -41,6 +42,28 @@ class Dlinkedlist{
             Tail = temp;
             count++;
          }  
+    }
+
+    public int GenerateID()
+    {
+        return idCounter++;
+    }
+
+    public void DisplayExpenses()
+    {
+        Node? current = Head;
+        if (current == null)
+        {
+            Console.WriteLine("No expenses found.");
+            return;
+        }
+
+        Console.WriteLine("ID\tName\tAmount\tMember\tDate");
+        while (current != null)
+        {
+            Console.WriteLine($"{current.Data.ID}\t{current.Data.Name}\t${current.Data.Amount}\t{current.Data.Member.Name}\t{current.Data.Date}");
+            current = current.Next;
+        }
     }
 
     public void PrintFromStart(){

@@ -1,14 +1,15 @@
+using System;
 
-class Member{
-
+class Members
+{
     public int ID;
     public string Name;
     public int Password;
-    
-    public Member(int id, string name, int password){
-        this.ID = id;
-        this.Name = name;
-        this.Password = password;
-    }
 
+    public Members(int id, string name, int password)
+    {
+        ID = id;
+        Name = name;
+        Password = password;
+    }
 }
