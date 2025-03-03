@@ -33,17 +33,22 @@ class PersonalAccount
     {
         while (true)
         {
-            Console.Clear();
-            Console.WriteLine($"===== Personal Account ({loggedInUser?.Name}) =====");
-            Console.WriteLine("1. Add Expense");
-            Console.WriteLine("2. View My Expenses");
-            Console.WriteLine("3. Delete Expense by ID");
-            Console.WriteLine("4. Edit Expense by ID");
-            Console.WriteLine("5. Show Overall Expense");
-            Console.WriteLine("6. Logout");
-            Console.Write("Select an option: ");
+    Console.Clear();
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+   Console.WriteLine($"           ║           Personal Account, {loggedInUser?.Name,-20}              ║");
+    Console.WriteLine("           ╠═══════════════════════════════════════════════════════════════╣");
+    Console.WriteLine("           ║                1. Add Expense                                 ║");
+    Console.WriteLine("           ║                2. View My Expenses                            ║");
+    Console.WriteLine("           ║                3. Delete Expense by ID                        ║");
+    Console.WriteLine("           ║                4. Edit Expense by ID                          ║");
+    Console.WriteLine("           ║                5. Show Overall Expense                        ║");
+    Console.WriteLine("           ║                6. Logout                                      ║");
+    Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+    Console.ResetColor(); 
 
-            string choice = Console.ReadLine() ?? "";
+    Console.Write("Select an option: ");
+    string choice = Console.ReadLine() ?? "";
 
             switch (choice)
             {
@@ -66,7 +71,11 @@ class PersonalAccount
                     loggedInUser = null;
                     return;
                 default:
-                    Console.WriteLine("Invalid choice! Try again.");
+                        Console.ForegroundColor = ConsoleColor.Red; // Set color for the header border
+                        Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+                        Console.WriteLine("           ║                  Invalid choice! Try again.                   ║");
+                        Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+                        Console.ResetColor(); // Reset to default color
                     Console.ReadKey();
                     break;
             }
@@ -97,9 +106,14 @@ class PersonalAccount
     static void ViewPersonalExpenses(Dlinkedlist familyExpenses, AVLTree familyExpensesAVL)
     {
         Console.Clear();
-        Console.WriteLine("===== View Family Expenses =====");
-        Console.WriteLine("1. By Day");
-        Console.WriteLine("2. By Price");
+    Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the menu border
+    Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("           ║                     View Your Expenses                        ║");
+    Console.WriteLine("           ╠═══════════════════════════════════════════════════════════════╣");
+    Console.WriteLine("           ║                1. By Day                                      ║");
+    Console.WriteLine("           ║                2. By Price                                    ║");
+    Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+    Console.ResetColor(); // Reset to default color
         Console.Write("Select an option: ");
 
         string choice = Console.ReadLine() ?? "";
@@ -108,16 +122,30 @@ class PersonalAccount
         {
             case "1":
                 // Use the previous method (linked list) to display expenses by day
-                Console.WriteLine("===== Family Expenses (By Day) =====");
+                Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the menu border
+                Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the header border
+                Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+                Console.WriteLine("           ║                  Your Expenses (By Day)                       ║");
+                Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+                Console.ResetColor(); // Reset to default color
                 familyExpenses.DisplayExpenses(loggedInUser?.Name);
                 break;
             case "2":
                 // Use the AVL tree to display expenses by price
-                Console.WriteLine("===== Family Expenses (By Price) =====");
+                                Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the menu border
+                Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the header border
+                Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+                Console.WriteLine("           ║                  Your Expenses (By Price)                     ║");
+                Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+                Console.ResetColor(); // Reset to default color
                 familyExpensesAVL.DisplayInorder(loggedInUser?.Name); // Display all data (username = null)
                 break;
             default:
-                Console.WriteLine("Invalid choice! Try again.");
+                Console.ForegroundColor = ConsoleColor.Red; // Set color for the header border
+                Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+                Console.WriteLine("           ║                  Invalid choice! Try again.                   ║");
+                Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+                Console.ResetColor(); // Reset to default color
                 break;
         }
 
@@ -194,8 +222,13 @@ class PersonalAccount
     static void ShowOverallExpense(Dlinkedlist personalExpenses)
     {
         int totalExpense = personalExpenses.CalculateTotalExpense(loggedInUser?.Name);
-        Console.WriteLine($"===== Overall Expense for {loggedInUser?.Name} =====");
-        Console.WriteLine($"Total Expense: {totalExpense}");
+Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the menu border
+Console.WriteLine($"\n╔════════════════════════════════════════════╗");
+Console.WriteLine($"║   Overall Expense for {loggedInUser?.Name,-20} ║");
+Console.WriteLine($"╠════════════════════════════════════════════╣");
+Console.WriteLine($"║    Total Expense: ${totalExpense,-15}         ║");
+Console.WriteLine($"╚════════════════════════════════════════════╝\n");
+
         Console.ReadKey();
     }
 

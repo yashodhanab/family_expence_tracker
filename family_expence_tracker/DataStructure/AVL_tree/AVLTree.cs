@@ -112,32 +112,41 @@ public class AVLTree{
     }
 
     public void DisplayInorder(string? username = null)
-    {
+{
+    Console.Clear();
+    Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the table border
+    Console.WriteLine("           ╔═════════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("           ║                       Expenses (By Price)                       ║");
+    Console.WriteLine("           ╠═════════════════════════════════════════════════════════════════╣");
+    Console.WriteLine("           ║ ID       Name                Amount    Member        Date       ║");
+    Console.WriteLine("           ╠═════════════════════════════════════════════════════════════════╣");
 
-        Console.WriteLine("ID\tName\tAmount\tMember\tDate");
-        
-        Inorder(Root, username);
+    Console.ForegroundColor = ConsoleColor.White; // Set color for the table data
+    Inorder(Root, username);
+
+    Console.ForegroundColor = ConsoleColor.Cyan; // Reset color for the table footer
+    Console.WriteLine("           ╚═════════════════════════════════════════════════════════════════╝");
+    Console.ResetColor(); // Reset to default color
+}
+
+private void Inorder(AVLNode? node, string? username)
+{
+    if (node == null)
+        return;
+
+    // Recur for the left subtree
+    Inorder(node.Left, username);
+
+    // Display data if username is null or matches the expense's member
+    if (username == null || node.Data.Member.Name.Equals(username, StringComparison.OrdinalIgnoreCase))
+    {
+        // Format each row with fixed column widths
+        Console.WriteLine($"           ║ {node.Data.ID,-8} {node.Data.Name,-20} ${node.Data.Amount,-8} {node.Data.Member.Name,-12} {node.Data.Date,-10} ║");
     }
 
-    private void Inorder(AVLNode? node, string? username)
-    {
-        if (node == null)
-            return;
-
-        // Recur for the left subtree
-        Inorder(node.Left, username);
-
-        // Display data if username is null or matches the expense's member
-        if (username == null || node.Data.Member.Name.Equals(username, StringComparison.OrdinalIgnoreCase))
-        {
-            
-            Console.WriteLine($"{node.Data.ID}\t{node.Data.Name}\t{node.Data.Amount}\t{node.Data.Member.Name}\t{node.Data.Date}");
-        }
-
-        // Recur for the right subtree
-        Inorder(node.Right, username);
-    }
-
+    // Recur for the right subtree
+    Inorder(node.Right, username);
+}
 
     public void DeleteById(int id)
 {

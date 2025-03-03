@@ -52,35 +52,50 @@ class Dlinkedlist
     {
         return idCounter++;
     }
+public void DisplayExpenses(string? name = null)
+{
+    Node? current = Head;
+    bool found = false;
 
-    public void DisplayExpenses(string? name = null)
+    if (current == null)
     {
-        Node? current = Head;
-        bool found = false;
-
-        if (current == null)
-        {
-            Console.WriteLine("No expenses found.");
-            return;
-        }
-
-        Console.WriteLine("ID\tName\t\tAmount\tMember\tDate");
-
-        while (current != null)
-        {
-            if (string.IsNullOrEmpty(name) || current.Data.Member.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
-            {
-                Console.WriteLine($"{current.Data.ID}\t{current.Data.Name}\t\t${current.Data.Amount}\t{current.Data.Member.Name}\t{current.Data.Date}");
-                found = true;
-            }
-            current = current.Next;
-        }
-
-        if (!found)
-        {
-            Console.WriteLine($"No expenses found for member: {name}");
-        }
+        Console.ForegroundColor = ConsoleColor.Red; // Set color for the error message
+        Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+        Console.WriteLine("           ║                      No Expenses Found                        ║");
+        Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+        Console.ResetColor(); // Reset to default color
+        return;
     }
+
+    Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the table border
+    Console.WriteLine("           ╔═════════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("           ║                      Family Expenses                            ║");
+    Console.WriteLine("           ╠═════════════════════════════════════════════════════════════════╣");
+    Console.WriteLine("           ║ ID       Name                Amount    Member        Date       ║");
+    Console.WriteLine("           ╠═════════════════════════════════════════════════════════════════╣");
+
+    Console.ForegroundColor = ConsoleColor.White; // Set color for the table data
+    while (current != null)
+    {
+        if (string.IsNullOrEmpty(name) || current.Data.Member.Name.Equals(name, StringComparison.OrdinalIgnoreCase))
+        {
+            // Format each row with fixed column widths
+            Console.WriteLine($"           ║ {current.Data.ID,-8} {current.Data.Name,-20} ${current.Data.Amount,-8} {current.Data.Member.Name,-12} {current.Data.Date,-10} ║");
+            found = true;
+        }
+        current = current.Next;
+    }
+
+    if (!found)
+    {
+        Console.ForegroundColor = ConsoleColor.Red; // Set color for the no data message
+        Console.WriteLine($"           ║ No expenses found for member: {name,-30} ║");
+    }
+
+    Console.ForegroundColor = ConsoleColor.Cyan; // Reset color for the table footer
+    Console.WriteLine("           ╚═════════════════════════════════════════════════════════════════╝");
+    Console.ResetColor(); // Reset to default color
+}
 
     public void PrintFromStart()
     {

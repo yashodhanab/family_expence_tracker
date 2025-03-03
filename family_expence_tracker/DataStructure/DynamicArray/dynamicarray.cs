@@ -20,14 +20,29 @@ class DynamicArray
         members[Count++] = member;
     }
 
-    public void DisplayMembers()
+public void DisplayMembers()
+{
+    Console.Clear();
+    Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the table border
+    Console.WriteLine("           ╔══════════════════════════╗");
+    Console.WriteLine("           ║        Family Members    ║");
+    Console.WriteLine("           ╠══════════════════════════╣");
+    Console.WriteLine("           ║ ID     Name              ║");
+    Console.WriteLine("           ╠══════════════════════════╣");
+
+    // Table data
+    Console.ForegroundColor = ConsoleColor.White;
+    for (int i = 0; i < Count; i++)
     {
-        Console.WriteLine("ID\tName");
-        for (int i = 0; i < Count; i++)
-        {
-            Console.WriteLine($"{members[i].ID}\t{members[i].Name}");
-        }
+        Console.WriteLine($"           ║ {members[i].ID,-6} {members[i].Name,-18}║");
     }
+
+    // Table footer
+    Console.ForegroundColor = ConsoleColor.Cyan;
+    Console.WriteLine("           ╚══════════════════════════╝");
+    Console.ResetColor(); // Reset to default color
+}
+
 
     public Members? GetMemberById(int id)
     {
@@ -50,23 +65,30 @@ class DynamicArray
     }
 
 
-    public void DisplayMembersWithExpenses(Dlinkedlist familyExpenses)
-    {
+public void DisplayMembersWithExpenses(Dlinkedlist familyExpenses)
+{
     if (Count == 0)
     {
-        Console.WriteLine("No members found.");
+        Console.WriteLine("\nNo members found.");
         return;
     }
 
-    Console.WriteLine("ID\tName\tTotal Expenses");
+    Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the table border
+    Console.WriteLine("\n ╔══════════╦════════════════════╦════════════╗");
+    Console.WriteLine(" ║    ID    ║        Name        ║   Total    ║");
+    Console.WriteLine(" ╠══════════╬════════════════════╬════════════╣");
 
     for (int i = 0; i < Count; i++)
     {
         Members member = GetMemberById(i + 1); // Assuming IDs start from 1
-        int totalExpense = familyExpenses.CalculateTotalExpense(member.Name); // Assuming familyExpenses is accessible
-        Console.WriteLine($"{member.ID}\t{member.Name}\t\t${totalExpense}");
+        int totalExpense = familyExpenses.CalculateTotalExpense(member.Name);
+
+    Console.WriteLine($" ║ {member.ID,-8} ║ {member.Name,-18} ║ ${totalExpense,-8}  ║");
     }
+
+    Console.WriteLine(" ╚══════════╩════════════════════╩════════════╝\n");
 }
+
 
 
 

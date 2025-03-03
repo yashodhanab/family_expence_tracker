@@ -9,18 +9,23 @@ class FamilyAccount
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("===== Family Account Menu =====");
-            Console.WriteLine("1. Add Expense");
-            Console.WriteLine("2. View Expenses");
-            Console.WriteLine("3. Add Member");
-            Console.WriteLine("4. View Members");
-            Console.WriteLine("5. Delete Expense by ID");
-            Console.WriteLine("6. Edit Expense by ID");
-            Console.WriteLine("7. Show All Members and Their Data");
-            Console.WriteLine("8. Logout");
-            Console.Write("Select an option: ");
+    Console.ForegroundColor = ConsoleColor.DarkCyan; // Set color for the menu border
+    Console.WriteLine("           ╔══════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("           ║                     Family Account Menu                      ║");
+    Console.WriteLine("           ╠══════════════════════════════════════════════════════════════╣");
+    Console.WriteLine("           ║                1. Add Expense                                ║");
+    Console.WriteLine("           ║                2. View Expenses                              ║");
+    Console.WriteLine("           ║                3. Add Member                                 ║");
+    Console.WriteLine("           ║                4. View Members                               ║");
+    Console.WriteLine("           ║                5. Delete Expense by ID                       ║");
+    Console.WriteLine("           ║                6. Edit Expense by ID                         ║");
+    Console.WriteLine("           ║                7. Show All Members and Their Data            ║");
+    Console.WriteLine("           ║                8. Logout                                     ║");
+    Console.WriteLine("           ╚══════════════════════════════════════════════════════════════╝");
+    Console.ResetColor(); // Reset to default color
 
-            string choice = Console.ReadLine() ?? "";
+    Console.Write("Select an option: ");
+    string choice = Console.ReadLine() ?? "";
 
             switch (choice)
             {
@@ -48,7 +53,12 @@ class FamilyAccount
                 case "8":
                     return;
                 default:
-                    Console.WriteLine("Invalid choice! Try again.");
+                        Console.ForegroundColor = ConsoleColor.Red; // Set color for the header border
+                        Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+                        Console.WriteLine("           ║                  Invalid choice! Try again.                   ║");
+                        Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+                        Console.ResetColor(); // Reset to default color
+                    break;
                     Console.ReadKey();
                     break;
             }
@@ -100,10 +110,19 @@ static void AddFamilyExpense(Dlinkedlist familyExpenses, DynamicArray members, A
 
     static void ViewFamilyExpenses(Dlinkedlist familyExpenses, AVLTree familyExpensesAVL)
     {
-        Console.Clear();
-        Console.WriteLine("===== View Family Expenses =====");
-        Console.WriteLine("1. By Day");
-        Console.WriteLine("2. By Price");
+        Console.Clear(); 
+
+    Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the menu border
+    Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("           ║                     View Family Expenses                      ║");
+    Console.WriteLine("           ╠═══════════════════════════════════════════════════════════════╣");
+    Console.WriteLine("           ║                1. By Day                                      ║");
+    Console.WriteLine("           ║                2. By Price                                    ║");
+    Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+    Console.ResetColor(); // Reset to default color
+
+
+
         Console.Write("Select an option: ");
 
         string choice = Console.ReadLine() ?? "";
@@ -112,16 +131,29 @@ static void AddFamilyExpense(Dlinkedlist familyExpenses, DynamicArray members, A
         {
             case "1":
                 // Use the previous method (linked list) to display expenses by day
-                Console.WriteLine("===== Family Expenses (By Day) =====");
+                Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the menu border
+    Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the header border
+    Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("           ║                  Family Expenses (By Day)                    ║");
+    Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+    Console.ResetColor(); // Reset to default color
                 familyExpenses.DisplayExpenses();
                 break;
             case "2":
                 // Use the AVL tree to display expenses by price
-                Console.WriteLine("===== Family Expenses (By Price) =====");
+                 Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the header border
+    Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("           ║                  Family Expenses (By Price)                   ║");
+    Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+    Console.ResetColor(); // Reset to default color
                 familyExpensesAVL.DisplayInorder(); // Display all data (username = null)
                 break;
             default:
-                Console.WriteLine("Invalid choice! Try again.");
+                 Console.ForegroundColor = ConsoleColor.Red; // Set color for the header border
+    Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+    Console.WriteLine("           ║                  Invalid choice! Try again.                   ║");
+    Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+    Console.ResetColor(); // Reset to default color
                 break;
         }
 
