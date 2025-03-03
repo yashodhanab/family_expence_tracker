@@ -49,12 +49,7 @@ class Dlinkedlist
         }
     }
 
-    ///////////////////////////////
-    // public void Sort()
-    //     {
-    //         Head = MergeSort.Sort(Head);
-    //     }
-    ///////////////////////////////
+ 
     public int GenerateID()
     {
         return idCounter++;
@@ -271,7 +266,7 @@ public void DisplayExpenses(string? name = null)
         return totalExpense;
     }
 
-        // MergeSort Entry Point
+        
     public void MergeSortBy(string filter)
     {
         Head = MergeSort(Head, filter);
@@ -285,7 +280,7 @@ public void DisplayExpenses(string? name = null)
         Tail = temp;
     }
 
-    // Recursive Merge Sort
+    
     private Node? MergeSort(Node? head, string filter)
     {
         if (head == null || head.Next == null)
@@ -306,7 +301,7 @@ public void DisplayExpenses(string? name = null)
         return MergeSortedLists(left, right, filter);
     }
 
-    // Find Middle Node
+   
     private Node? GetMiddle(Node? head)
     {
         if (head == null) return null;
@@ -320,7 +315,7 @@ public void DisplayExpenses(string? name = null)
         return slow;
     }
 
-    // Merge two sorted lists
+    
     private Node? MergeSortedLists(Node? left, Node? right, string filter)
     {
         if (left == null) return right;
@@ -365,5 +360,210 @@ public void DisplayExpenses(string? name = null)
 
 
     }
+
+
+
+    // ==========================Quick Sort by Price=======================================
+public void QuickSortByPrice()
+{
+    Head = QuickSort(Head, Tail);
+}
+
+private Node? QuickSort(Node? low, Node? high)
+{
+    if (low != null && high != null && low != high && low != high.Next)
+    {
+        Node? pivot = Partition(low, high);
+        if (pivot != null)
+        {
+            QuickSort(low, pivot.Prev);
+            QuickSort(pivot.Next, high);
+        }
+    }
+    return low;
+}
+
+private Node? Partition(Node? low, Node? high)
+{
+    if (low == null || high == null) return null;
+
+    int pivot = high.Data.Amount;
+    Node? i = low.Prev;
+
+    for (Node? j = low; j != high; j = j?.Next)
+    {
+        if (j != null && j.Data.Amount <= pivot)
+        {
+            i = (i == null) ? low : i.Next;
+            Swap(i, j);
+        }
+    }
+
+    i = (i == null) ? low : i.Next;
+    Swap(i, high);
+    return i;
+}
+
+private void Swap(Node? a, Node? b)
+{
+    if (a == null || b == null) return;
+
+    Expence temp = a.Data;
+    a.Data = b.Data;
+    b.Data = temp;
+}
+
+
+//=================================Bubble Sort by Price===================================
+public void BubbleSortByPrice()
+{
+    if (Head == null || Head.Next == null)
+        return; // No need to sort if the list is empty or has only one element
+
+    bool swapped;
+    Node? current;
+    Node? lastSorted = null;
+
+    do
+    {
+        swapped = false;
+        current = Head;
+
+        while (current.Next != lastSorted)
+        {
+            if (current.Data.Amount > current.Next.Data.Amount)
+            {
+                // Swap the data of the two nodes
+                Swapbuble(current, current.Next);
+                swapped = true;
+            }
+            current = current.Next;
+        }
+
+        // Mark the last sorted node to optimize the next pass
+        lastSorted = current;
+
+    } while (swapped); // Repeat until no swaps are made
+}
+
+private void Swapbuble(Node? a, Node? b)
+{
+    if (a == null || b == null) return;
+
+    // Swap the data of the two nodes
+    Expence temp = a.Data;
+    a.Data = b.Data;
+    b.Data = temp;
+}
+
+public void SelectionSortById()
+{
+    if (Head == null || Head.Next == null)
+        return; // No need to sort if the list is empty or has only one element
+
+    Node? current = Head;
+
+    while (current != null)
+    {
+        // Find the node with the minimum ID in the unsorted portion
+        Node? minNode = FindMinNodeById(current);
+
+        // Swap the data of the current node and the node with the minimum ID
+        if (minNode != null && minNode != current)
+        {
+            SwapSelection(current, minNode);
+        }
+
+        // Move to the next unsorted node
+        current = current.Next;
+    }
+}
+
+private Node? FindMinNodeById(Node? start)
+{
+    if (start == null)
+        return null;
+
+    Node? minNode = start;
+    Node? current = start;
+
+    while (current != null)
+    {
+        if (current.Data.ID < minNode.Data.ID)
+        {
+            minNode = current;
+        }
+        current = current.Next;
+    }
+
+    return minNode;
+}
+
+private void SwapSelection(Node? a, Node? b)
+{
+    if (a == null || b == null) return;
+
+    // Swap the data of the two nodes
+    Expence temp = a.Data;
+    a.Data = b.Data;
+    b.Data = temp;
+}
+
+public void QuickSortByName()
+{
+    Head = QuickSortName(Head, Tail);
+}
+
+
+// Quick Sort by Name
+private Node? QuickSortName(Node? low, Node? high)
+{
+    if (low != null && high != null && low != high && low != high.Next)
+    {
+        
+        Node? pivot = PartitionName(low, high);
+
+        if (pivot != null)
+        {
+            QuickSortName(low, pivot.Prev);
+            QuickSortName(pivot.Next, high);
+        }
+    }
+    return low;
+}
+
+private Node? PartitionName(Node? low, Node? high)
+{
+    if (low == null || high == null) return null;
+
+    string pivot = high.Data.Name; 
+    Node? i = low.Prev; 
+
+    for (Node? j = low; j != high; j = j?.Next)
+    {
+        if (j != null && string.Compare(j.Data.Name, pivot, StringComparison.OrdinalIgnoreCase) < 0)
+        {
+            i = (i == null) ? low : i.Next; 
+            SwapName(i, j); 
+        }
+    }
+
+    i = (i == null) ? low : i.Next; 
+    SwapName(i, high); 
+    return i; 
+}
+
+private void SwapName(Node? a, Node? b)
+{
+    if (a == null || b == null) return;
+
+   
+    Expence temp = a.Data;
+    a.Data = b.Data;
+    b.Data = temp;
+}
+
+
+
 }
 

@@ -1,69 +1,73 @@
-
-
+using System.Diagnostics;
 
 class FamilyAccount
 {
 
-    public static void FamilyAccountMenu(Dlinkedlist familyExpenses, DynamicArray members, AVLTree familyExpensesAVL)
-    {
-        while (true)
-        {
+    
+    public static void FamilyAccountMenu(Dlinkedlist familyExpenses, DynamicArray members, AVLTree familyExpensesAVL){
+        Stopwatch stopwatch = new Stopwatch();
+
+        while (true){
             Console.Clear();
-    Console.ForegroundColor = ConsoleColor.DarkCyan; // Set color for the menu border
-    Console.WriteLine("           ╔══════════════════════════════════════════════════════════════╗");
-    Console.WriteLine("           ║                     Family Account Menu                      ║");
-    Console.WriteLine("           ╠══════════════════════════════════════════════════════════════╣");
-    Console.WriteLine("           ║                1. Add Expense                                ║");
-    Console.WriteLine("           ║                2. View Expenses                              ║");
-    Console.WriteLine("           ║                3. Add Member                                 ║");
-    Console.WriteLine("           ║                4. View Members                               ║");
-    Console.WriteLine("           ║                5. Delete Expense by ID                       ║");
-    Console.WriteLine("           ║                6. Edit Expense by ID                         ║");
-    Console.WriteLine("           ║                7. Show All Members and Their Data            ║");
-    Console.WriteLine("           ║                8. Logout                                     ║");
-    Console.WriteLine("           ╚══════════════════════════════════════════════════════════════╝");
-    Console.ResetColor(); // Reset to default color
+            Console.ForegroundColor = ConsoleColor.DarkCyan; 
+            Console.WriteLine("           ╔══════════════════════════════════════════════════════════════╗");
+            Console.WriteLine("           ║                     Family Account Menu                      ║");
+            Console.WriteLine("           ╠══════════════════════════════════════════════════════════════╣");
+            Console.WriteLine("           ║                1. Add Expense                                ║");
+            Console.WriteLine("           ║                2. View Expenses                              ║");
+            Console.WriteLine("           ║                3. Add Member                                 ║");
+            Console.WriteLine("           ║                4. View Members                               ║");
+            Console.WriteLine("           ║                5. Delete Expense by ID                       ║");
+            Console.WriteLine("           ║                6. Edit Expense by ID                         ║");
+            Console.WriteLine("           ║                7. Show All Members and Their Data            ║");
+            Console.WriteLine("           ║                8. Logout                                     ║");
+            Console.WriteLine("           ╚══════════════════════════════════════════════════════════════╝");
+            Console.ResetColor(); 
 
-    Console.Write("Select an option: ");
-    string choice = Console.ReadLine() ?? "";
+            Console.Write("Select an option: ");
+            string choice = Console.ReadLine() ?? "";
 
-            switch (choice)
-            {
-                case "1":
-                    AddFamilyExpense(familyExpenses, members, familyExpensesAVL);
-                    break;
-                case "2":
-                    ViewFamilyExpenses(familyExpenses,familyExpensesAVL);
-                    break;
-                case "3":
-                    AddMember(members);
-                    break;
-                case "4":
-                    ViewMembers(members);
-                    break;
-                case "5":
-                    DeleteFamilyExpenseById(familyExpenses,familyExpensesAVL);
-                    break;
-                case "6":
-                    EditFamilyExpenseById(familyExpenses, familyExpensesAVL);
-                    break;
-                case "7":
-                    ShowAllMembersAndData(members,familyExpenses);
-                    break;
-                case "8":
-                    return;
-                default:
-                        Console.ForegroundColor = ConsoleColor.Red; // Set color for the header border
-                        Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
-                        Console.WriteLine("           ║                  Invalid choice! Try again.                   ║");
-                        Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
-                        Console.ResetColor(); // Reset to default color
-                    break;
-                    Console.ReadKey();
-                    break;
-            }
+                    switch (choice)
+                    {
+                        case "1":
+                            stopwatch.Start();
+                            AddFamilyExpense(familyExpenses, members, familyExpensesAVL);
+                            stopwatch.Stop();
+                            Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
+
+                            break;
+                        case "2":
+                            ViewFamilyExpenses(familyExpenses,familyExpensesAVL);
+                            break;
+                        case "3":
+                            AddMember(members);
+                            break;
+                        case "4":
+                            ViewMembers(members);
+                            break;
+                        case "5":
+                            DeleteFamilyExpenseById(familyExpenses,familyExpensesAVL);
+                            break;
+                        case "6":
+                            EditFamilyExpenseById(familyExpenses, familyExpensesAVL);
+                            break;
+                        case "7":
+                            ShowAllMembersAndData(members,familyExpenses);
+                            break;
+                        case "8":
+                            return;
+                        default:
+                                Console.ForegroundColor = ConsoleColor.Red; 
+                                Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
+                                Console.WriteLine("           ║                  Invalid choice! Try again.                   ║");
+                                Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
+                                Console.ResetColor(); 
+                            break;
+                            Console.ReadKey();
+                            break;
+                    }
+                }
         }
-    }
 
 static void AddFamilyExpense(Dlinkedlist familyExpenses, DynamicArray members, AVLTree familyExpensesAVL)
 {
@@ -108,19 +112,23 @@ static void AddFamilyExpense(Dlinkedlist familyExpenses, DynamicArray members, A
     Console.ReadKey();
 }
 
-    static void ViewFamilyExpenses(Dlinkedlist familyExpenses, AVLTree familyExpensesAVL)
-    {
-        Console.Clear(); 
+    static void ViewFamilyExpenses(Dlinkedlist familyExpenses, AVLTree familyExpensesAVL){
 
-    Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the menu border
+    Stopwatch stopwatch = new Stopwatch();
+    Console.Clear(); 
+
+    Console.ForegroundColor = ConsoleColor.Cyan;
     Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
     Console.WriteLine("           ║                     View Family Expenses                      ║");
     Console.WriteLine("           ╠═══════════════════════════════════════════════════════════════╣");
-    Console.WriteLine("           ║                1. By Day (Merge Sort)                         ║");
+    Console.WriteLine("           ║                1. By Day (Selection Sort)                     ║");
     Console.WriteLine("           ║                2. By Price                                    ║");
     Console.WriteLine("           ║                3. By Price (Merge Sort)                       ║");
+    Console.WriteLine("           ║                4. By Price (Quick Sort)                       ║");
+    Console.WriteLine("           ║                5. By Price (Bubble Sort)                      ║");
+    Console.WriteLine("           ║                6. By Name (Quick Sort)                        ║");
     Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
-    Console.ResetColor(); // Reset to default color
+    Console.ResetColor(); 
 
 
 
@@ -131,37 +139,69 @@ static void AddFamilyExpense(Dlinkedlist familyExpenses, DynamicArray members, A
         switch (choice)
         {
             case "1":
-                // Use the previous method (linked list) to display expenses by day
-                Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the menu border
-    Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the header border
+                
+    Console.ForegroundColor = ConsoleColor.Cyan; 
+    Console.ForegroundColor = ConsoleColor.Cyan; 
     Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
-    Console.WriteLine("           ║                  Family Expenses (By Day)                    ║");
+    Console.WriteLine("           ║                  Family Expenses (By Day)                     ║");
     Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
-    Console.ResetColor(); // Reset to default color
-                familyExpenses.MergeSortBy("Id");
+    Console.ResetColor(); 
+                stopwatch.Start();
+                familyExpenses.SelectionSortById();
+                stopwatch.Stop();
                 familyExpenses.DisplayExpenses();
+                Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
                 break;
             case "2":
             
-                // Use the AVL tree to display expenses by price
-                 Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the header border
+                
+                 Console.ForegroundColor = ConsoleColor.Cyan;
     Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
     Console.WriteLine("           ║                  Family Expenses (By Price)                   ║");
     Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
-    Console.ResetColor(); // Reset to default color
-                familyExpensesAVL.DisplayInorder(); // Display all data (username = null)
+    Console.ResetColor(); 
+                stopwatch.Start();
+                familyExpensesAVL.DisplayInorder(); 
+                stopwatch.Stop();
+                Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
                 break;
             case "3":
+                stopwatch.Start();
                 familyExpenses.MergeSortBy("Price");
+                stopwatch.Stop();
                 familyExpenses.DisplayExpenses();
-                
+                Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
+                break;
+
+            case "4":
+                stopwatch.Start();
+                familyExpenses.QuickSortByPrice();
+                stopwatch.Stop();
+                familyExpenses.DisplayExpenses();
+                Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
+                break;
+            
+            case "5":
+                stopwatch.Start();
+                familyExpenses.BubbleSortByPrice();
+                stopwatch.Stop();
+                familyExpenses.DisplayExpenses();
+                Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
+                break;
+            
+            case "6":
+                stopwatch.Start();
+                familyExpenses.QuickSortByName();
+                stopwatch.Stop();
+                familyExpenses.DisplayExpenses();
+                Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
                 break;
             default:
-                 Console.ForegroundColor = ConsoleColor.Red; // Set color for the header border
+                 Console.ForegroundColor = ConsoleColor.Red; 
     Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
     Console.WriteLine("           ║                  Invalid choice! Try again.                   ║");
     Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
-    Console.ResetColor(); // Reset to default color
+    Console.ResetColor(); 
                 break;
         }
 

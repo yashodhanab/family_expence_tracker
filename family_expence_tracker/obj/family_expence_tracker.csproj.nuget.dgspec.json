@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Pyash\\family_expence_tracker\\family_expence_tracker\\family_expence_tracker.csproj": {}
+    "c:\\Users\\Pyash\\family_expence_tracker\\family_expence_tracker\\family_expence_tracker.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Pyash\\family_expence_tracker\\family_expence_tracker\\family_expence_tracker.csproj": {
+    "c:\\Users\\Pyash\\family_expence_tracker\\family_expence_tracker\\family_expence_tracker.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Pyash\\family_expence_tracker\\family_expence_tracker\\family_expence_tracker.csproj",
+        "projectUniqueName": "c:\\Users\\Pyash\\family_expence_tracker\\family_expence_tracker\\family_expence_tracker.csproj",
         "projectName": "family_expence_tracker",
-        "projectPath": "C:\\Users\\Pyash\\family_expence_tracker\\family_expence_tracker\\family_expence_tracker.csproj",
+        "projectPath": "c:\\Users\\Pyash\\family_expence_tracker\\family_expence_tracker\\family_expence_tracker.csproj",
         "packagesPath": "C:\\Users\\Pyash\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Pyash\\family_expence_tracker\\family_expence_tracker\\obj\\",
+        "outputPath": "c:\\Users\\Pyash\\family_expence_tracker\\family_expence_tracker\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Pyash\\AppData\\Roaming\\NuGet\\NuGet.Config",

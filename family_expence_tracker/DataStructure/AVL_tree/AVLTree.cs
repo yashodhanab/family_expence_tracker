@@ -31,11 +31,11 @@ public class AVLTree{
         AVLNode x = y.Left;
         AVLNode T2 = x.Right;
 
-        // Perform rotation
+        
         x.Right = y;
         y.Left = T2;
 
-        // Update heights
+        
         y.Height = Math.Max(GetHeight(y.Left), GetHeight(y.Right)) + 1;
         x.Height = Math.Max(GetHeight(x.Left), GetHeight(x.Right)) + 1;
 
@@ -48,11 +48,11 @@ public class AVLTree{
         AVLNode y = x.Right;
         AVLNode T2 = y.Left;
 
-        // Perform rotation
+        
         y.Left = x;
         x.Right = T2;
 
-        // Update heights
+        
         x.Height = Math.Max(GetHeight(x.Left), GetHeight(x.Right)) + 1;
         y.Height = Math.Max(GetHeight(y.Left), GetHeight(y.Right)) + 1;
 
@@ -68,7 +68,7 @@ public class AVLTree{
     
     private AVLNode Insert(AVLNode? node, Expence data)
     {
-        // Perform standard BST insertion
+        
         if (node == null)
             return new AVLNode(data);
 
@@ -76,13 +76,13 @@ public class AVLTree{
             node.Left = Insert(node.Left, data);
         else if (data.Amount > node.Data.Amount)
             node.Right = Insert(node.Right, data);
-        else // Duplicate amounts are not allowed in this implementation
+        else 
             return node;
 
-        // Update height of the current node
+        
         node.Height = 1 + Math.Max(GetHeight(node.Left), GetHeight(node.Right));
 
-        // Get the balance factor to check if the node became unbalanced
+        
         int balance = GetBalance(node);
 
         // Perform rotations if the node is unbalanced

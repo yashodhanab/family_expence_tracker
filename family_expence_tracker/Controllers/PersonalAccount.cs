@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 class PersonalAccount
 {
@@ -31,12 +32,13 @@ class PersonalAccount
 
     static void PersonalAccountMenu(Dlinkedlist personalExpenses, AVLTree familyExpensesAVL)
     {
+        Stopwatch stopwatch = new Stopwatch();
         while (true)
         {
     Console.Clear();
     Console.ForegroundColor = ConsoleColor.Cyan;
     Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
-   Console.WriteLine($"           ║           Personal Account, {loggedInUser?.Name,-20}              ║");
+    Console.WriteLine($"           ║           Personal Account, {loggedInUser?.Name,-20}              ║");
     Console.WriteLine("           ╠═══════════════════════════════════════════════════════════════╣");
     Console.WriteLine("           ║                1. Add Expense                                 ║");
     Console.WriteLine("           ║                2. View My Expenses                            ║");
@@ -53,7 +55,10 @@ class PersonalAccount
             switch (choice)
             {
                 case "1":
+                    stopwatch.Start();
                     AddPersonalExpense(personalExpenses, familyExpensesAVL);
+                    stopwatch.Stop();
+                    Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
                     break;
                 case "2":
                     ViewPersonalExpenses(personalExpenses, familyExpensesAVL);
@@ -105,14 +110,18 @@ class PersonalAccount
 
     static void ViewPersonalExpenses(Dlinkedlist familyExpenses, AVLTree familyExpensesAVL)
     {
-        Console.Clear();
+        Stopwatch stopwatch = new Stopwatch();
+    Console.Clear();
     Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the menu border
     Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
     Console.WriteLine("           ║                     View Your Expenses                        ║");
     Console.WriteLine("           ╠═══════════════════════════════════════════════════════════════╣");
-    Console.WriteLine("           ║                1. By Day (Merge Sort)                         ║");
+    Console.WriteLine("           ║                1. By Day (Selection Sort)                     ║");
     Console.WriteLine("           ║                2. By Price                                    ║");
-    Console.WriteLine("           ║                2. By Price (Merge Sort)                       ║");
+    Console.WriteLine("           ║                3. By Price (Merge Sort)                       ║");
+    Console.WriteLine("           ║                4. By Price (Quick Sort)                       ║");
+    Console.WriteLine("           ║                5. By Price (Bubble Sort)                      ║");
+    Console.WriteLine("           ║                6. By Name (Quick Sort)                        ║");
     Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
     Console.ResetColor(); // Reset to default color
         Console.Write("Select an option: ");
@@ -129,8 +138,11 @@ class PersonalAccount
                 Console.WriteLine("           ║                  Your Expenses (By Day)                       ║");
                 Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
                 Console.ResetColor(); // Reset to default color
-                familyExpenses.MergeSortBy("Id");
+                stopwatch.Start();
+                familyExpenses.SelectionSortById();
+                stopwatch.Stop();
                 familyExpenses.DisplayExpenses(loggedInUser?.Name);
+                Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
                 break;
             case "2":
                 // Use the AVL tree to display expenses by price
@@ -140,12 +152,43 @@ class PersonalAccount
                 Console.WriteLine("           ║                  Your Expenses (By Price)                     ║");
                 Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
                 Console.ResetColor(); // Reset to default color
+                stopwatch.Start();
                 familyExpensesAVL.DisplayInorder(loggedInUser?.Name); // Display all data (username = null)
+                stopwatch.Stop();
+                Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
                 break;
             case "3":
+                stopwatch.Start();
                 familyExpenses.MergeSortBy("Price");
+                stopwatch.Stop();
                 familyExpenses.DisplayExpenses(loggedInUser?.Name);
+                Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
                 break;
+
+            case "4":
+                stopwatch.Start();
+                familyExpenses.QuickSortByPrice();
+                stopwatch.Stop();
+                familyExpenses.DisplayExpenses(loggedInUser?.Name);
+                Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
+                break;
+
+            case "5":
+                stopwatch.Start();
+                familyExpenses.BubbleSortByPrice();
+                stopwatch.Stop();
+                familyExpenses.DisplayExpenses(loggedInUser?.Name);
+                Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
+                break;
+
+            case "6":
+                stopwatch.Start();
+                familyExpenses.QuickSortByName();
+                stopwatch.Stop();
+                familyExpenses.DisplayExpenses(loggedInUser?.Name);
+                Console.WriteLine($"Time elapsed: {stopwatch.ElapsedMilliseconds} ms");
+                break;
+            
             default:
                 Console.ForegroundColor = ConsoleColor.Red; // Set color for the header border
                 Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
