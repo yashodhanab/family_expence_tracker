@@ -12,6 +12,7 @@ class Dlinkedlist
         Tail = null;
     }
 
+
     public void AddFirst(Expence val)
     {
         Node temp = new Node(val);
@@ -48,6 +49,12 @@ class Dlinkedlist
         }
     }
 
+    ///////////////////////////////
+    // public void Sort()
+    //     {
+    //         Head = MergeSort.Sort(Head);
+    //     }
+    ///////////////////////////////
     public int GenerateID()
     {
         return idCounter++;
@@ -246,6 +253,7 @@ public void DisplayExpenses(string? name = null)
         }
 
     public int CalculateTotalExpense(string username)
+
     {
         Node? current = Head;
         int totalExpense = 0;
@@ -262,4 +270,100 @@ public void DisplayExpenses(string? name = null)
 
         return totalExpense;
     }
+
+        // MergeSort Entry Point
+    public void MergeSortBy(string filter)
+    {
+        Head = MergeSort(Head, filter);
+
+        // Update the Tail pointer
+        Node? temp = Head;
+        while (temp?.Next != null)
+        {
+            temp = temp.Next;
+        }
+        Tail = temp;
+    }
+
+    // Recursive Merge Sort
+    private Node? MergeSort(Node? head, string filter)
+    {
+        if (head == null || head.Next == null)
+            return head;
+
+        // Split the list into two halves
+        Node? middle = GetMiddle(head);
+        Node? nextToMiddle = middle?.Next;
+
+        if (middle != null)
+            middle.Next = null; // Split the list
+
+        // Recursively sort both halves
+        Node? left = MergeSort(head, filter);
+        Node? right = MergeSort(nextToMiddle, filter);
+
+        // Merge sorted halves
+        return MergeSortedLists(left, right, filter);
+    }
+
+    // Find Middle Node
+    private Node? GetMiddle(Node? head)
+    {
+        if (head == null) return null;
+
+        Node? slow = head, fast = head;
+        while (fast?.Next != null && fast.Next.Next != null)
+        {
+            slow = slow?.Next;
+            fast = fast.Next.Next;
+        }
+        return slow;
+    }
+
+    // Merge two sorted lists
+    private Node? MergeSortedLists(Node? left, Node? right, string filter)
+    {
+        if (left == null) return right;
+        if (right == null) return left;
+        
+        
+            if (filter=="Price" && left.Data.Amount <= right.Data.Amount)
+            {
+                left.Next = MergeSortedLists(left.Next, right , filter);
+                left.Next.Prev = left;
+                left.Prev = null;
+                return left;
+            }
+            else
+            {
+                right.Next = MergeSortedLists(left, right.Next, filter);
+                right.Next.Prev = right;
+                right.Prev = null;
+                return right;
+            }
+
+
+             if (filter=="Id" && left.Data.ID <= right.Data.ID)
+            {
+                left.Next = MergeSortedLists(left.Next, right , filter);
+                left.Next.Prev = left;
+                left.Prev = null;
+                return left;
+            }
+            else
+            {
+                right.Next = MergeSortedLists(left, right.Next, filter);
+                right.Next.Prev = right;
+                right.Prev = null;
+                return right;
+            }
+
+
+       
+
+        
+
+
+    }
 }
+

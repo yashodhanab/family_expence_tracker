@@ -110,8 +110,9 @@ class PersonalAccount
     Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
     Console.WriteLine("           ║                     View Your Expenses                        ║");
     Console.WriteLine("           ╠═══════════════════════════════════════════════════════════════╣");
-    Console.WriteLine("           ║                1. By Day                                      ║");
+    Console.WriteLine("           ║                1. By Day (Merge Sort)                         ║");
     Console.WriteLine("           ║                2. By Price                                    ║");
+    Console.WriteLine("           ║                2. By Price (Merge Sort)                       ║");
     Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
     Console.ResetColor(); // Reset to default color
         Console.Write("Select an option: ");
@@ -128,6 +129,7 @@ class PersonalAccount
                 Console.WriteLine("           ║                  Your Expenses (By Day)                       ║");
                 Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
                 Console.ResetColor(); // Reset to default color
+                familyExpenses.MergeSortBy("Id");
                 familyExpenses.DisplayExpenses(loggedInUser?.Name);
                 break;
             case "2":
@@ -139,6 +141,10 @@ class PersonalAccount
                 Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
                 Console.ResetColor(); // Reset to default color
                 familyExpensesAVL.DisplayInorder(loggedInUser?.Name); // Display all data (username = null)
+                break;
+            case "3":
+                familyExpenses.MergeSortBy("Price");
+                familyExpenses.DisplayExpenses(loggedInUser?.Name);
                 break;
             default:
                 Console.ForegroundColor = ConsoleColor.Red; // Set color for the header border

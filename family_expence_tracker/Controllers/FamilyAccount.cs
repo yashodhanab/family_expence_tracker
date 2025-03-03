@@ -116,8 +116,9 @@ static void AddFamilyExpense(Dlinkedlist familyExpenses, DynamicArray members, A
     Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
     Console.WriteLine("           ║                     View Family Expenses                      ║");
     Console.WriteLine("           ╠═══════════════════════════════════════════════════════════════╣");
-    Console.WriteLine("           ║                1. By Day                                      ║");
+    Console.WriteLine("           ║                1. By Day (Merge Sort)                         ║");
     Console.WriteLine("           ║                2. By Price                                    ║");
+    Console.WriteLine("           ║                3. By Price (Merge Sort)                       ║");
     Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
     Console.ResetColor(); // Reset to default color
 
@@ -137,9 +138,11 @@ static void AddFamilyExpense(Dlinkedlist familyExpenses, DynamicArray members, A
     Console.WriteLine("           ║                  Family Expenses (By Day)                    ║");
     Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
     Console.ResetColor(); // Reset to default color
+                familyExpenses.MergeSortBy("Id");
                 familyExpenses.DisplayExpenses();
                 break;
             case "2":
+            
                 // Use the AVL tree to display expenses by price
                  Console.ForegroundColor = ConsoleColor.Cyan; // Set color for the header border
     Console.WriteLine("           ╔═══════════════════════════════════════════════════════════════╗");
@@ -147,6 +150,11 @@ static void AddFamilyExpense(Dlinkedlist familyExpenses, DynamicArray members, A
     Console.WriteLine("           ╚═══════════════════════════════════════════════════════════════╝");
     Console.ResetColor(); // Reset to default color
                 familyExpensesAVL.DisplayInorder(); // Display all data (username = null)
+                break;
+            case "3":
+                familyExpenses.MergeSortBy("Price");
+                familyExpenses.DisplayExpenses();
+                
                 break;
             default:
                  Console.ForegroundColor = ConsoleColor.Red; // Set color for the header border
