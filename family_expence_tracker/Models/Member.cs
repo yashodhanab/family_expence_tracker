@@ -1,6 +1,6 @@
 using System;
 
-class Members
+public class Members
 {
     public int ID;
     public string Name;

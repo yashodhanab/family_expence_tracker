@@ -48,4 +48,27 @@ class DynamicArray
         }
         return null;
     }
+
+
+    public void DisplayMembersWithExpenses(Dlinkedlist familyExpenses)
+    {
+    if (Count == 0)
+    {
+        Console.WriteLine("No members found.");
+        return;
+    }
+
+    Console.WriteLine("ID\tName\tTotal Expenses");
+
+    for (int i = 0; i < Count; i++)
+    {
+        Members member = GetMemberById(i + 1); // Assuming IDs start from 1
+        int totalExpense = familyExpenses.CalculateTotalExpense(member.Name); // Assuming familyExpenses is accessible
+        Console.WriteLine($"{member.ID}\t{member.Name}\t\t${totalExpense}");
+    }
 }
+
+
+
+}
+

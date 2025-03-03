@@ -1,12 +1,14 @@
 using System;
 
-class Expence
+public class Expence
 {
-    public int ID;
-    public string Name;
-    public int Amount;
-    public string Date;
-    public Members Member;
+    public int ID{ get; set; }
+    public string Name{ get; set; }
+    public int Amount{ get; set; }
+    public string Date{ get; set; }
+    public Members Member{ get; set; }
+
+  
 
     public Expence(int id, string name, int amount, string? date, Members member)
     {
